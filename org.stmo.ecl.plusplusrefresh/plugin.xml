@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ 	<extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.file"
+            defaultHandler="org.stmo.ecl.plusplusrefresh.CompleteRefreshHandler"
+            description="Refreshes the active target platform and all open projects"
+            id="org.stmo.ecl.plusplusrefresh.CompleteRefreshCommand"
+            name="Complete Refresh">
+      </command>
+     </extension>
+   <extension point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.stmo.ecl.plusplusrefresh.CompleteRefreshCommand"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+F5">
+      </key>
+   </extension>
+</plugin>
