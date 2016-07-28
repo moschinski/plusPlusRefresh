@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: plusPlusRefresh Console
+Bundle-SymbolicName: org.stmo.ecl.plusplusrefresh.console
+Bundle-Version: 1.0.0.1000
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.7.0,4.0.0)",
+ org.stmo.ecl.plusplusrefresh;bundle-version="[1.0.0,2.0.0)"
