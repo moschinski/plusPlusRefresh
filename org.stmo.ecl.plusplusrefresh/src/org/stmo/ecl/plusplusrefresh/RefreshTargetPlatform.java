@@ -13,10 +13,9 @@ import org.eclipse.pde.core.target.ITargetPlatformService;
 import org.eclipse.pde.core.target.LoadTargetDefinitionJob;
 import org.eclipse.pde.internal.core.PDECore;
 
+@SuppressWarnings("restriction")
 class RefreshTargetPlatform {
 	
-	
-	@SuppressWarnings("restriction")
 	void refreshTargetPlatform() throws CoreException, InterruptedException {
 		ITargetPlatformService platfomService = (ITargetPlatformService) PDECore.getDefault()
 				.acquireService(ITargetPlatformService.class.getName());

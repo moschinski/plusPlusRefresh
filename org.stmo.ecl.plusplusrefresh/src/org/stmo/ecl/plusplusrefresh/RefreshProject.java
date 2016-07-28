@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -15,13 +13,15 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.e4.core.services.log.Logger;
 
 class RefreshProject {
 	
-	protected void executeInternal(Collection<String> projectsToRefresh) throws Exception {
+	void refreshProjects(Collection<String> projectsToRefresh) throws InterruptedException, CoreException {
+		if (projectsToRefresh == null) {
+			throw new NullPointerException("projectsToRefresh");
+		}
 		if (projectsToRefresh.isEmpty()) {
-			refreshWorkspace();
+			throw new IllegalArgumentException("at least one project to refresh must be given");
 		}
 		refreshProjectsByName(projectsToRefresh);
 	}
@@ -32,7 +32,6 @@ class RefreshProject {
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
-//		return textResult("Triggered refresh of workspace");
 	}
 
 	private void refreshProjectsByName(Collection<String> projectsToRefresh)
@@ -40,7 +39,6 @@ class RefreshProject {
 		Collection<IProject> projects = getProjectsByNames(projectsToRefresh);
 		if (projects.isEmpty()) {
 			return;
-//			return textResult("Found no projects to refresh");
 		}
 		refreshProjects(projects);
 	}
@@ -54,10 +52,8 @@ class RefreshProject {
 	}
 
 	private void refreshProjects(Iterable<IProject> projects) throws InterruptedException, CoreException {
-		int i = 0;
 		for (final IProject project : projects) {
 			if (project.isOpen()) {
-				i++;
 				String jobName = "Refreshing project " + project.getName();
 				refreshResource(project, jobName);
 			}

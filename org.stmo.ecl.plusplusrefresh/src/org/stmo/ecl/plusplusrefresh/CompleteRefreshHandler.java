@@ -13,16 +13,17 @@ public class CompleteRefreshHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) {
+		Refresher refresher = new Refresher();
 		try {
-			new RefreshTargetPlatform().refreshTargetPlatform();
+			refresher.refreshTargetPlatorm();
+			refresher.refreshAllOpenProjects();
 		} catch (CoreException e) {
-			IWorkbenchWindow workbenchWindow = HandlerUtil.getActiveWorkbenchWindow( event );
-			MessageDialog.openError(workbenchWindow.getShell(), "Failed to refresh target platform", "Had an exception when refreshing workspace: " + e.getMessage());
+			IWorkbenchWindow workbenchWindow = HandlerUtil.getActiveWorkbenchWindow(event);
+			MessageDialog.openError(workbenchWindow.getShell(), "Failed to refresh workspace",
+					"Had an exception when refreshing workspace: " + e.getMessage());
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
-			return null;
 		}
-		new RefreshProject().refreshWorkspace();
 		return null;
 	}
 

@@ -15,3 +15,4 @@ Require-Bundle: org.eclipse.e4.core.services;bundle-version="2.0.100",
 Import-Package: org.eclipse.pde.core.target,
  org.eclipse.pde.internal.core,
  org.eclipse.pde.internal.core.target
+Export-Package: org.stmo.ecl.plusplusrefresh
