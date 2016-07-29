@@ -26,14 +26,6 @@ class RefreshProject {
 		refreshProjectsByName(projectsToRefresh);
 	}
 
-	void refreshWorkspace() {
-		try {
-			refreshResource(ResourcesPlugin.getWorkspace().getRoot(), "Refreshing workspace");
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
-	}
-
 	private void refreshProjectsByName(Collection<String> projectsToRefresh)
 			throws InterruptedException, CoreException {
 		Collection<IProject> projects = getProjectsByNames(projectsToRefresh);
@@ -60,7 +52,7 @@ class RefreshProject {
 		}
 	}
 
-	private void refreshResource(final IResource resource, String jobName) throws InterruptedException {
+	private Job refreshResource(final IResource resource, String jobName) {
 		Job job = new Job(jobName) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -74,12 +66,16 @@ class RefreshProject {
 					return Status.OK_STATUS;
 				} catch (CoreException e) {
 					String errorMsg = String.format("An exception happened while refreshing '%s'", resource.getName());
-					return new Status(IStatus.ERROR, "MondShell", errorMsg);
+					return new Status(IStatus.ERROR, PlusPlusRefreshPlugin.ID, errorMsg);
 				}
 			}
 		};
 		job.setUser(true);
 		job.setPriority(Job.LONG);
-		job.schedule();
+		return job;
+	}
+
+	Job createRefreshJob() {
+		return refreshResource(ResourcesPlugin.getWorkspace().getRoot(), "Refreshing workspace");		
 	}
 }
