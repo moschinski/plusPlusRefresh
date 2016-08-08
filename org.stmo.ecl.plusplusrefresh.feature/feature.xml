@@ -2,7 +2,7 @@
 <feature
       id="org.stmo.ecl.plusplusrefresh.feature"
       label="plusPlusRefresh Feature"
-      version="1.0.0.1000">
+      version="1.0.0.1003">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]

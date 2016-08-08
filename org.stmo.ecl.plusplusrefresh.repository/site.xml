@@ -3,5 +3,5 @@
    <description name="plusPlusRefresh Repository">
       plusPluse Refresh provides advanced refreshing for Eclipse
    </description>
-   <feature url="features/org.stmo.ecl.plusplusrefresh.feature_1.0.0.1000.jar" id="org.stmo.ecl.plusplusrefresh.feature" version="1.0.0.1000"/>
+   <feature url="features/org.stmo.ecl.plusplusrefresh.feature_1.0.0.1003.jar" id="org.stmo.ecl.plusplusrefresh.feature" version="1.0.0.1003"/>
 </site>

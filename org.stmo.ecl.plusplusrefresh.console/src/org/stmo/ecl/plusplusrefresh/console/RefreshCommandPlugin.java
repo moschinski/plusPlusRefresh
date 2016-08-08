@@ -10,7 +10,7 @@ public class RefreshCommandPlugin extends Plugin {
 
 	@Override
 	public void start(BundleContext context) throws Exception {
-		ReloadCommandHandler refreshCmdHandler = new ReloadCommandHandler();
+		PlusPlusCommandHandler refreshCmdHandler = new PlusPlusCommandHandler();
 		Hashtable<String, ?> properties = new Hashtable<String, String>();
 		context.registerService(CommandProvider.class, refreshCmdHandler, properties);
 	}
