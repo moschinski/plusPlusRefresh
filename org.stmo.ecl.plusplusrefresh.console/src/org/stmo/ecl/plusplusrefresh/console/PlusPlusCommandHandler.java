@@ -22,8 +22,21 @@ public class PlusPlusCommandHandler implements CommandProvider  {
 	 * @throws Exception 
 	 */
 	public void _reload(CommandInterpreter ci) throws Exception {
-		refresher.refresh(/* refresh all projects */ true, /*refresh target platform */ true);
-		ci.println("Reload of target platform and refresh of workspace triggered");
+		boolean reloadTargetPlatform = shouldReloadTargetPlatform(ci);
+		refresher.refresh(/* refresh all projects */ true, reloadTargetPlatform);
+		ci.println("Triggered refresh of workspace" + (reloadTargetPlatform ? " and reload of target platform" : ""));
+	}
+
+	private boolean shouldReloadTargetPlatform(CommandInterpreter ci) {
+		String arg;
+		while ((arg = ci.nextArgument()) != null) {
+			if (arg.equalsIgnoreCase("-platform")) {
+				return true;
+			} else {
+				throw new IllegalArgumentException(String.format("The reload argument '%s' is unknown", arg));
+			}
+		}
+		return false;
 	}
 	
 	/**
